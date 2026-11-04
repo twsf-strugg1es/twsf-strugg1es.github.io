@@ -266,7 +266,7 @@ mysql> SELECT blood_group, COUNT(*) FROM donor
     ],
     certificationsHeading: "Certificates",
     certifications: [
-      { name: "Product Management Career Bootcamp", issuer: "Human Development Network Bangladesh", year: "2026, in progress" },
+      { name: "Product Management Career Bootcamp", issuer: "Human Development Network Bangladesh", year: "2026" },
       { name: "Introduction to User Experience Design", issuer: "Georgia Institute of Technology, Coursera", year: "2026" },
       { name: "Google AI Essentials", issuer: "Google Career Certificates", year: "2025" },
     ],
