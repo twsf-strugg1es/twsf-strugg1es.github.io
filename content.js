@@ -115,7 +115,7 @@ window.SITE = {
     heading: "Things I helped ship",
     projects: [
       {
-        title: "Online Exam Management System",
+        title: "Fairpaper",
         kind: "Web platform",
         year: "2025",
         summary:
@@ -123,17 +123,12 @@ window.SITE = {
         role: "Product owner and backend: scoped the features, wrote the FastAPI services in Python.",
         stack: ["Python", "FastAPI", "React", "SQL"],
         links: [
-          { label: "Source on GitHub", href: "https://github.com/twsf-strugg1es/Online-Exam-Management-System" },
+          { label: "Live platform", href: "https://fairpaper.netlify.app/" },
         ],
-        // Featured project: one large image plus a strip of smaller ones.
         media: {
-          type: "images",
-          main: { src: "assets/work/exam-dark.webp", alt: "Exam list for an admin, in dark mode, with scheduled, live and closed exams" },
-          strip: [
-            { src: "assets/work/exam-taking.webp", alt: "A student answering question 2 of 5 with a 27 minute timer" },
-            { src: "assets/work/exam-student.webp", alt: "Student dashboard showing an exam in progress and an upcoming quiz" },
-            { src: "assets/work/exam-light.webp", alt: "Admin exam list in light mode with protections per exam" },
-          ],
+          type: "image",
+          src: "assets/work/fairpaper.webp",
+          alt: "Fairpaper: Fair exams in any browser with automated marking and integrity protections",
         },
       },
       {
