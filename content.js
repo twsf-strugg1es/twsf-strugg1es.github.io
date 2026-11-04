@@ -16,7 +16,7 @@ window.SITE = {
     title: "Ahmad Farruk Towsif | Technical Project Coordinator",
     description:
       "Technical project coordinator in Dhaka. I turn messy briefs into software that ships on time. Python, MySQL, product management.",
-    url: "https://twsf-strugg1es.github.io/",
+    url: "https://whoistowsif.me/",
   },
 
   person: {
