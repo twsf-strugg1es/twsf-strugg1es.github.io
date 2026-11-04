@@ -80,27 +80,9 @@
     if (drawerSfxBtn) drawerSfxBtn.textContent = txt;
   }
 
-  /* ============================ PHOSPHOR THEMES ============================ */
-  const THEMES = ["amber", "green", "cyan"];
-  let currentTheme = localStorage.getItem("twsf_theme") || "amber";
-
-  function applyTheme(th) {
-    if (!THEMES.includes(th)) th = "amber";
-    currentTheme = th;
-    localStorage.setItem("twsf_theme", th);
-    document.documentElement.setAttribute("data-theme", th);
-    const label = $("#theme-label");
-    const drawerTheme = $("#drawer-theme-toggle");
-    const u = th.toUpperCase();
-    if (label) label.textContent = u;
-    if (drawerTheme) drawerTheme.textContent = "PALETTE: " + u;
-  }
-
-  function cycleTheme() {
-    RetroAudio.playBlip();
-    const idx = (THEMES.indexOf(currentTheme) + 1) % THEMES.length;
-    applyTheme(THEMES[idx]);
-  }
+  // Ensure theme is always Amber phosphor
+  document.documentElement.removeAttribute("data-theme");
+  localStorage.removeItem("twsf_theme");
 
   /* ============================ CRT SCANLINES ============================ */
   let crtEnabled = localStorage.getItem("twsf_crt") !== "false";
@@ -346,11 +328,6 @@
     const drawerCrt = $("#drawer-crt-toggle");
     if (drawerCrt) drawerCrt.addEventListener("click", toggleCrt);
 
-    const themeBtn = $("#theme-toggle");
-    if (themeBtn) themeBtn.addEventListener("click", cycleTheme);
-    const drawerTheme = $("#drawer-theme-toggle");
-    if (drawerTheme) drawerTheme.addEventListener("click", cycleTheme);
-
     const drawerReboot = $("#drawer-reboot");
     if (drawerReboot) {
       drawerReboot.addEventListener("click", () => {
@@ -359,7 +336,6 @@
       });
     }
 
-    applyTheme(currentTheme);
     applyCrt(crtEnabled);
     updateSfxButtons();
   }
@@ -836,7 +812,7 @@
 
     const commands = {
       help: () => [
-        "Commands: whoami, work, experience, skills, contact" + (S.person.cvUrl ? ", cv" : "") + ", date, sfx, crt, theme, reboot, clear"
+        "Commands: whoami, work, experience, skills, contact" + (S.person.cvUrl ? ", cv" : "") + ", date, sfx, crt, reboot, clear"
       ],
       whoami: () => [S.person.name + ". " + S.person.role + " at " + S.person.company + ", " + S.person.location + "."],
       work: () => S.work.projects.map((p) => "· " + p.title + " (" + p.kind + ", " + p.year + ")"),
@@ -855,14 +831,6 @@
       crt: () => {
         toggleCrt();
         return ["CRT scanlines " + (crtEnabled ? "ENABLED" : "DISABLED")];
-      },
-      theme: (arg) => {
-        if (arg && THEMES.includes(arg)) {
-          applyTheme(arg);
-          return ["Switched palette to " + arg.toUpperCase()];
-        }
-        cycleTheme();
-        return ["Palette switched to " + currentTheme.toUpperCase() + ". Options: theme amber, theme green, theme cyan"];
       },
       reboot: () => {
         setTimeout(() => initLoader(true), 300);
@@ -889,7 +857,7 @@
       h("label", { for: "term-in", class: "term__ps" }, promptText), input);
 
     const chips = h("div", { class: "term__chips", role: "group", "aria-label": "Quick commands" },
-      ["whoami", "work", "skills", "contact", "theme", "reboot"].map((c) =>
+      ["whoami", "work", "skills", "contact", "reboot"].map((c) =>
         h("button", { type: "button", class: "chip", onclick: () => { RetroAudio.playBlip(); run(c); } }, c)
       )
     );
