@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="3" fill="#0b0b0a"/>
-  <rect x="2" y="2" width="28" height="28" rx="2" fill="#141412" stroke="#ff6a2b" stroke-width="1.5"/>
-  <rect x="5" y="5" width="22" height="15" fill="#0b0b0a"/>
-  <!-- pixel T -->
-  <rect x="8" y="8" width="9" height="2.5" fill="#ece8df"/>
-  <rect x="11.2" y="10.5" width="2.6" height="6.5" fill="#ece8df"/>
-  <!-- blinking cursor -->
-  <rect x="16" y="12" width="3.5" height="5" fill="#ff6a2b"/>
-  <!-- computer stand base -->
-  <rect x="14" y="21.5" width="4" height="2" fill="#a9a59b"/>
-  <rect x="9" y="23.5" width="14" height="2.5" rx="0.5" fill="#a9a59b"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0b0b0a"/><text x="5" y="23" font-family="monospace" font-size="20" font-weight="700" fill="#ece8df">t</text><rect x="18" y="20" width="9" height="3" fill="#ff6a2b"/></svg>
