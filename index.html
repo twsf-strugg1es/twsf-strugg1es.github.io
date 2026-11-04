@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ahmad Farruk Towsif | Technical Project Coordinator</title>
+  <meta name="description" content="Technical project coordinator in Dhaka. I turn messy briefs into software that ships on time. Python, MySQL, sprint pipelines, product management.">
+  <meta name="theme-color" content="#0b0b0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- OpenGraph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://twsf-strugg1es.github.io/">
+  <meta property="og:title" content="Ahmad Farruk Towsif | Technical Project Coordinator">
+  <meta property="og:description" content="I turn messy briefs into software that ships on time. Python, MySQL, sprint delivery.">
+  <meta property="og:image" content="assets/og.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ahmad Farruk Towsif | Technical Project Coordinator">
+  <meta name="twitter:description" content="I turn messy briefs into software that ships on time.">
+  <meta name="twitter:image" content="assets/og.png">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700&family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.304/fonts/webfonts/JetBrainsMono-Medium.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    document.documentElement.classList.add("js");
+    // Add ?still to the URL to see every section with motion off (handy for screenshots).
+    if (/[?&]still/.test(location.search)) document.documentElement.classList.add("still");
+  </script>
+</head>
+<body>
+  <!-- ==================== VINTAGE PIXEL LOADING SCREEN ==================== -->
+  <div id="pixel-loader" class="pixel-loader" role="dialog" aria-modal="true" aria-label="System Initializing">
+    <div class="pixel-loader__frame">
+      <div class="pixel-loader__screen">
+        <div class="pixel-loader__glow" aria-hidden="true"></div>
+        <div class="pixel-loader__header">
+          <span class="pixel-loader__sys-id">TOWSIF-OS // ROM BIOS v2.6.4</span>
+          <span class="pixel-loader__dhaka-time" id="loader-clock">DHAKA 00:00</span>
+        </div>
+
+        <div class="pixel-loader__body">
+          <div class="pixel-loader__avatar-box" aria-hidden="true">
+            <pre class="pixel-loader__art">
+ ┌─────────────────┐
+ │  [■] TOWSIF.SYS │
+ │  PM & BACKEND   │
+ │  DHAKA NODE     │
+ └────────┬────────┘
+     ┌────┴────┐
+     └─────────┘</pre>
+          </div>
+
+          <div class="pixel-loader__terminal">
+            <div class="pixel-loader__lines" id="loader-log" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="pixel-loader__footer">
+          <div class="pixel-loader__meter-meta">
+            <span class="pixel-loader__status-text" id="loader-status">INITIALIZING KERNEL...</span>
+            <span class="pixel-loader__pct" id="loader-pct">00%</span>
+          </div>
+          <div class="pixel-loader__bar">
+            <div class="pixel-loader__bar-fill" id="loader-bar-fill"></div>
+          </div>
+          <div class="pixel-loader__blocks" id="loader-blocks" aria-hidden="true">[░░░░░░░░░░░░░░░░░░░░░░░░]</div>
+          <button type="button" class="pixel-loader__skip" id="loader-skip" aria-label="Skip loading screen">
+            [ TAP OR PRESS SPACE TO SKIP ▶▶ ]
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRT Scanline & Grain Texture Filter -->
+  <div class="crt-overlay" id="crt-overlay" aria-hidden="true"></div>
+
+  <!-- Skip link for keyboard users -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ==================== NAV ==================== -->
+  <header class="nav" id="nav">
+    <div class="wrap nav__in">
+      <a class="nav__mark" href="#top" data-slot="mark"></a>
+
+      <nav class="nav__desktop" aria-label="Sections">
+        <ul class="nav__links" data-slot="nav"></ul>
+      </nav>
+
+      <div class="nav__tools">
+        <button type="button" class="pixel-tool-btn" id="sfx-toggle" title="Toggle 8-bit Retro Audio" aria-pressed="false" aria-label="Toggle retro audio">
+          <span class="pixel-tool-icon">♪</span> <span class="pixel-tool-label">SFX: OFF</span>
+        </button>
+        <button type="button" class="pixel-tool-btn" id="crt-toggle" title="Toggle CRT Monitor Scanlines" aria-pressed="true" aria-label="Toggle CRT filter">
+          <span class="pixel-tool-icon">▦</span> <span class="pixel-tool-label">CRT: ON</span>
+        </button>
+        <button type="button" class="pixel-tool-btn" id="theme-toggle" title="Switch Phosphor Palette (Amber / Green / Cyan)" aria-label="Switch phosphor palette">
+          <span class="pixel-tool-icon">◈</span> <span class="pixel-tool-label" id="theme-label">AMBER</span>
+        </button>
+      </div>
+
+      <span class="nav__progress" aria-hidden="true" data-slot="progress"></span>
+      <a class="btn btn--small nav__cta" data-slot="nav-cta">Email me</a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button type="button" class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+        <span class="nav__toggle-icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="nav__toggle-text">MENU</span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+      <div class="mobile-drawer__head">
+        <span class="mobile-drawer__title">// SYSTEM_NAV</span>
+        <button type="button" class="mobile-drawer__close" id="drawer-close" aria-label="Close menu">[ ESC ✕ ]</button>
+      </div>
+      <ul class="mobile-drawer__links" id="drawer-links"></ul>
+      <div class="mobile-drawer__tools">
+        <div class="mobile-drawer__tools-title">[ SYSTEM SETTINGS ]</div>
+        <div class="mobile-drawer__tools-grid">
+          <button type="button" class="drawer-tool-btn" id="drawer-sfx-toggle">SFX: OFF</button>
+          <button type="button" class="drawer-tool-btn" id="drawer-crt-toggle">CRT: ON</button>
+          <button type="button" class="drawer-tool-btn" id="drawer-theme-toggle">PALETTE: AMBER</button>
+          <button type="button" class="drawer-tool-btn" id="drawer-reboot">REBOOT BIOS</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <canvas class="hero__field" aria-hidden="true"></canvas>
+      <div class="wrap hero__copy">
+        <div class="hero__lead">
+          <div class="pixel-badge"><span class="pixel-badge__dot">●</span> 00_SYSTEM_ROOT // ACTIVE</div>
+          <h1 id="hero-title" class="hero__title" data-slot="hero-title"></h1>
+          <p class="hero__line" data-slot="hero-line"></p>
+          <div class="hero__actions" data-slot="hero-actions"></div>
+        </div>
+        <dl class="hero__meta" data-slot="hero-meta"></dl>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title" data-slot="about"></section>
+    <section class="section experience" id="experience" aria-labelledby="experience-title" data-slot="experience"></section>
+    <section class="section work" id="work" aria-labelledby="work-title" data-slot="work"></section>
+    <section class="process" id="process" aria-labelledby="process-title" data-slot="process"></section>
+    <section class="section toolkit" id="toolkit" aria-labelledby="toolkit-title" data-slot="toolkit"></section>
+    <section class="section contact" id="contact" aria-labelledby="contact-title" data-slot="contact"></section>
+  </main>
+
+  <footer class="footer" data-slot="footer"></footer>
+
+  <noscript>
+    <div class="noscript wrap">
+      <h1>Ahmad Farruk Towsif</h1>
+      <p>Technical project coordinator at NS Media, Dhaka. I turn messy briefs into software that ships on time.</p>
+      <p><a href="mailto:towsif2000@gmail.com">towsif2000@gmail.com</a> ·
+         <a href="https://github.com/twsf-strugg1es">GitHub</a> ·
+         <a href="https://www.linkedin.com/in/ahmad-farruk-towsif/">LinkedIn</a></p>
+    </div>
+  </noscript>
+
+  <script src="content.js"></script>
+  <script src="ascii.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

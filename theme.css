@@ -1,0 +1,103 @@
+/* =====================================================================
+   THEME: colours, fonts and sizes. Change the look here.
+   Every other file uses these variables, so a change here is site-wide.
+   If you change the fonts, also update the Google Fonts <link> in index.html.
+   ===================================================================== */
+
+/* JetBrains Mono, full character set (the Google Fonts copy lacks the
+   box-drawing and block characters the ASCII art needs to line up). */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.304/fonts/webfonts/JetBrainsMono-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 500;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.304/fonts/webfonts/JetBrainsMono-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.304/fonts/webfonts/JetBrainsMono-Bold.woff2") format("woff2");
+}
+
+:root {
+  /* Surfaces */
+  --bg: #0b0b0a;          /* page ground */
+  --bg-2: #141412;        /* raised panels, one step up */
+  --bg-3: #1d1d1a;        /* hover on panels */
+  --bg-trans: rgba(11, 11, 10, 0.92);
+
+  /* Text */
+  --ink: #ece8df;         /* main text */
+  --ink-2: #a9a59b;       /* secondary text */
+  --ink-3: #5c5952;       /* faint ASCII texture */
+
+  /* The one accent: buttons, live states, the cursor glow */
+  --accent: #ff6a2b;      /* Default Amber/Orange phosphor */
+  --accent-ink: #0b0b0a;  /* text on top of the accent */
+  --accent-glow: rgba(255, 106, 43, 0.28);
+  --accent-faint: rgba(255, 106, 43, 0.12);
+
+  /* Fonts */
+  --font-display: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --font-pixel: "Silkscreen", "Press Start 2P", monospace;
+  --font-arcade: "Press Start 2P", monospace;
+
+  /* Retro Pixel styling */
+  --pixel-shadow: 3px 3px 0px #000, 4px 4px 0px var(--accent);
+  --pixel-shadow-sm: 2px 2px 0px #000, 3px 3px 0px var(--accent);
+  --pixel-border: 1px solid rgba(255, 255, 255, 0.1);
+  --pixel-border-accent: 1px solid var(--accent);
+
+  /* Type sizes (fluid between phone and desktop) */
+  --step-small: 0.8125rem;                          /* 13px */
+  --step-body: clamp(0.9375rem, 0.88rem + 0.2vw, 1.0625rem);
+  --step-lead: clamp(1.125rem, 0.95rem + 0.8vw, 1.625rem);
+  --step-h3: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+  --step-h2: clamp(2.125rem, 1rem + 4.5vw, 5.5rem);
+  --step-h1: clamp(2rem, 1.1rem + 3vw, 4.25rem);
+
+  /* Frame */
+  --gutter: clamp(16px, 3.5vw, 40px);
+  --max: 1360px;
+  --section-gap: clamp(84px, 11vw, 180px);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 700ms;
+}
+
+/* Phosphor theme variations */
+[data-theme="green"] {
+  --bg: #070e08;
+  --bg-2: #0e1a10;
+  --bg-3: #162619;
+  --bg-trans: rgba(7, 14, 8, 0.94);
+  --ink: #e2fbe5;
+  --ink-2: #92bfa0;
+  --ink-3: #43634b;
+  --accent: #33ff66;
+  --accent-ink: #070e08;
+  --accent-glow: rgba(51, 255, 102, 0.3);
+  --accent-faint: rgba(51, 255, 102, 0.12);
+}
+
+[data-theme="cyan"] {
+  --bg: #060e12;
+  --bg-2: #0c1a21;
+  --bg-3: #132731;
+  --bg-trans: rgba(6, 14, 18, 0.94);
+  --ink: #e0f7fc;
+  --ink-2: #92bfcc;
+  --ink-3: #3e636f;
+  --accent: #00e5ff;
+  --accent-ink: #060e12;
+  --accent-glow: rgba(0, 229, 255, 0.3);
+  --accent-faint: rgba(0, 229, 255, 0.12);
+}
