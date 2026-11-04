@@ -352,11 +352,10 @@
     ));
     const meta = $('[data-slot="hero-meta"]');
     const row = (k, v) => h("div", { class: "meta__row" }, h("dt", null, k), h("dd", null, v));
-    const clock = h("span", { "data-clock": "" });
     meta.replaceChildren(
       row("role", S.person.role),
       row("at", S.person.company),
-      row("based", h("span", null, S.person.location.split(",")[0], " · ", clock)),
+      row("based", S.person.location),
       row("status", h("span", null, h("span", { class: "dot", "aria-hidden": "true" }), S.person.status))
     );
     A.heroField($(".hero__field"), S.person.asciiWord);
@@ -396,7 +395,6 @@
   function renderExperience() {
     const e = S.experience;
     const list = h("ol", { class: "jobs" });
-    const axis = h("div", { class: "axis", "aria-hidden": "true" });
     e.items.forEach((it, i) => {
       const track = h("pre", { class: "track", "aria-hidden": "true" });
       const li = h("li", { class: "job", "data-reveal": "", style: `--d:${i * 60}ms` },
@@ -423,13 +421,11 @@
       h("div", { class: "wrap" },
         badge,
         h("div", { class: "experience__top" },
-          h("h2", { id: "experience-title", class: "h2", "data-reveal": "", "data-scramble": "" }, e.heading),
-          axis
+          h("h2", { id: "experience-title", class: "h2", "data-reveal": "", "data-scramble": "" }, e.heading)
         ),
         list
       )
     );
-    jobs.axis = axis;
   }
   function drawTracks() {
     if (!jobs.length) return;
@@ -437,21 +433,6 @@
     const span = e.axisTo - e.axisFrom;
     const cw = monoCell(jobs[0].track);
     const n = Math.max(16, Math.floor(jobs[0].track.clientWidth / cw));
-
-    const axisEl = jobs.axis;
-    const axisTrack = $(".job__body", jobs[0].el);
-    if (axisTrack && axisEl.parentElement) {
-      const offset = axisTrack.getBoundingClientRect().left - axisEl.parentElement.getBoundingClientRect().left;
-      axisEl.style.paddingLeft = Math.max(0, offset) + "px";
-    }
-    let ax = "".padEnd(n, " ").split("");
-    for (let y = e.axisFrom; y < e.axisTo; y++) {
-      const at = Math.round(((y - e.axisFrom) / span) * n);
-      const label = String(y);
-      if (n < 40 && (y - e.axisFrom) % 2) continue;
-      for (let k = 0; k < label.length && at + k < n; k++) ax[at + k] = label[k];
-    }
-    axisEl.textContent = ax.join("");
 
     const vh = window.innerHeight;
     jobs.forEach((j) => {
@@ -942,7 +923,6 @@
         nameP,
         h("div", { class: "footer__row" },
           h("p", null, "© " + year + " " + S.person.name),
-          h("p", null, "Dhaka ", h("span", { "data-clock": "" })),
           h("div", { class: "footer__tools" },
             rebootBtn,
             h("a", { href: "#top", class: "arrow-link" }, "Back to top")
