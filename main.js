@@ -543,25 +543,43 @@
     const stageTitle = h("h3", { class: "stage__title" });
     const stageText = h("p", { class: "stage__text" });
     const pre = h("pre", { class: "board", "aria-hidden": "true" });
-    const boardContainer = h("div", { class: "board-container", id: "board-container" }, mobileStepper, pre);
+    const boardContainer = h("div", { class: "board-container", id: "board-container", title: "Click any column to jump to that stage" }, mobileStepper, pre);
     const srList = h("ol", { class: "sr-only" }, P.stages.map((s, i) => h("li", null, P.columns[i] + ": " + s.title + ". " + s.text)));
 
     sec.replaceChildren(
-      h("div", { class: "wrap process__head" },
-        badge,
-        h("h2", { id: "process-title", class: "h2", "data-reveal": "", "data-scramble": "" }, P.heading),
-        h("p", { class: "process__intro", "data-reveal": "" }, P.intro)
-      ),
       h("div", { class: "process__track" },
         h("div", { class: "process__stick" },
-          h("div", { class: "wrap process__grid" },
-            boardContainer,
-            h("div", { class: "stage", "aria-hidden": "true" }, meter, stageTitle, stageText)
+          h("div", { class: "wrap process__inner" },
+            h("div", { class: "process__head" },
+              badge,
+              h("h2", { id: "process-title", class: "h2", "data-reveal": "", "data-scramble": "" }, P.heading),
+              h("p", { class: "process__intro", "data-reveal": "" }, P.intro)
+            ),
+            h("div", { class: "process__grid" },
+              boardContainer,
+              h("div", { class: "stage", "aria-hidden": "true" }, meter, stageTitle, stageText)
+            )
           )
         )
       ),
       srList
     );
+
+    // Clicking a column on the sprint board smoothly scrolls to that stage
+    boardContainer.addEventListener("click", (e) => {
+      const rect = pre.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const nCols = P.columns.length;
+      const colWidth = rect.width / nCols;
+      const targetCol = clamp(Math.floor(clickX / Math.max(1, colWidth)), 0, nCols - 1);
+      const trackRect = board.track.getBoundingClientRect();
+      const trackTop = trackRect.top + window.scrollY;
+      const total = trackRect.height - window.innerHeight;
+      const navH = 68;
+      const targetScroll = trackTop - navH + (targetCol / (nCols - 1)) * total;
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    });
+
     Object.assign(board, { sec, pre, meter, stageTitle, stageText, boardContainer, mobileStepper, track: $(".process__track", sec) });
     setStage(0, true);
   }
@@ -577,25 +595,13 @@
     }
     if (!instant) {
       RetroAudio.playBlip();
-      A.scramble(board.stageTitle, 500);
+      A.scramble(board.stageTitle, 400);
       board.stageText.classList.remove("swap");
       void board.stageText.offsetWidth;
       board.stageText.classList.add("swap");
     }
-    animateTicket(instant);
-  }
-  function animateTicket(instant) {
-    cancelAnimationFrame(board.anim);
-    if (instant || A.reduceMotion || board.x == null) { board.x = board.target; drawBoard(); return; }
-    const from = board.x, to = board.target, t0 = performance.now(), dur = 480;
-    const step = (now) => {
-      const p = clamp((now - t0) / dur, 0, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      board.x = from + (to - from) * e;
-      drawBoard();
-      if (p < 1) board.anim = requestAnimationFrame(step);
-    };
-    board.anim = requestAnimationFrame(step);
+    board.x = i;
+    drawBoard();
   }
   function drawBoard() {
     const P = S.process;
@@ -611,7 +617,7 @@
     const W = colW * nCols + gap * (nCols - 1);
 
     const lineH = parseFloat(getComputedStyle(pre).lineHeight) || 16;
-    const H = clamp(Math.floor((window.innerHeight * (W < 60 ? 0.38 : 0.6)) / lineH), 14, 38);
+    const H = clamp(Math.floor((window.innerHeight * (W < 60 ? 0.34 : 0.46)) / lineH), 13, 26);
     const grid = Array.from({ length: H }, () => Array(W).fill(" "));
     const tone = Array.from({ length: H }, () => Array(W).fill(0));
 
@@ -639,7 +645,7 @@
     const colX = (c) => c * (colW + gap);
     const ticketTop = 3;
     const inner = colW - 4;
-    const tLines = inner >= 10 ? [P.ticket.id, ...wrap(P.ticket.title, inner).slice(0, 3), P.ticket.owner] : [P.ticket.id];
+    const tLines = inner >= 10 ? [P.ticket.id, ...wrap(P.ticket.title, inner).slice(0, 2), P.ticket.owner] : [P.ticket.id];
     const tH = tLines.length + 3;
 
     P.columns.forEach((name, c) => {
@@ -684,11 +690,36 @@
   }
   function updateProcess() {
     const P = S.process;
+    if (!board.track) return;
     const r = board.track.getBoundingClientRect();
+    const navH = 68;
     const total = r.height - window.innerHeight;
-    const p = clamp(-r.top / Math.max(1, total), 0, 0.999);
-    const i = Math.floor(p * P.stages.length);
-    if (i !== board.stage) setStage(i);
+    const p = clamp((-r.top + navH) / Math.max(1, total), 0, 1);
+
+    const nStages = P.stages.length;
+    const targetX = p * (nStages - 1);
+    const activeStage = clamp(Math.round(targetX), 0, nStages - 1);
+
+    if (activeStage !== board.stage) {
+      board.stage = activeStage;
+      board.target = activeStage;
+      board.meter.textContent = P.columns[activeStage].toLowerCase() + "  " + "■".repeat(activeStage + 1) + "□".repeat(nStages - activeStage - 1);
+      board.stageTitle.textContent = P.stages[activeStage].title;
+      board.stageText.textContent = P.stages[activeStage].text;
+      if (board.mobileStepper) {
+        board.mobileStepper.textContent = `STAGE [0${activeStage + 1}/0${nStages}] // ${P.columns[activeStage].toUpperCase()}`;
+      }
+      RetroAudio.playBlip();
+      A.scramble(board.stageTitle, 400);
+      board.stageText.classList.remove("swap");
+      void board.stageText.offsetWidth;
+      board.stageText.classList.add("swap");
+    }
+
+    if (board.x !== targetX) {
+      board.x = targetX;
+      drawBoard();
+    }
   }
 
   /* ============================ TOOLKIT ============================ */
