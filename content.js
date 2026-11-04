@@ -117,7 +117,7 @@ window.SITE = {
       {
         title: "Fairpaper",
         kind: "Web platform",
-        year: "2025 – ",
+        year: "2025 - ",
         summary:
           "In an era where AI makes exam cheating effortless, Fairpaper keeps online testing honest. Built for schools, teachers, and hiring teams, every student gets an independently shuffled paper with tab-switch tracking, auto-saved answer recovery, and instant grading across multiple question formats.",
         role: "Product owner and backend: scoped the features, wrote the FastAPI services in Python.",
