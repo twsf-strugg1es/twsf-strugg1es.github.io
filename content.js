@@ -282,6 +282,6 @@ mysql> SELECT blood_group, COUNT(*) FROM donor
   },
 
   footer: {
-    note: "Made in Dhaka.",
+    note: "",
   },
 };

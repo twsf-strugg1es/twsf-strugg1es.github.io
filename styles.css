@@ -10,7 +10,7 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 body {
   margin: 0;
@@ -21,7 +21,7 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   min-height: 100vh;
 }
@@ -838,19 +838,25 @@ button, input { font: inherit; color: inherit; }
 }
 
 /* ---------- Process (ASCII Sprint Board) ---------- */
-.process { padding-top: var(--section-gap); }
+.process {
+  padding-top: var(--section-gap);
+  overflow: visible;
+}
 .process__intro { margin-top: 20px; color: var(--ink-2); line-height: 1.5; }
 .process__track {
   position: relative;
-  height: calc(var(--stages) * 80svh + 100svh);
+  height: calc(var(--stages) * 45svh + 100svh);
   margin-top: 24px;
+  overflow: visible;
 }
 .process__stick {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   height: 100svh;
   display: flex;
   align-items: center;
+  z-index: 10;
 }
 .process__grid {
   display: grid;
@@ -1115,6 +1121,14 @@ button, input { font: inherit; color: inherit; }
   overflow: hidden;
   word-break: break-all;
 }
+.footer__caret {
+  color: var(--accent);
+  display: inline-block;
+  margin-left: 0.04em;
+  animation: blink 1s steps(1) infinite;
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
 .footer__row {
   margin-top: 36px;
   display: flex;
@@ -1209,7 +1223,7 @@ button, input { font: inherit; color: inherit; }
   .strip { gap: 8px; margin-top: 8px; }
 
   /* Process */
-  .process__track { height: calc(var(--stages) * 75svh + 100svh); }
+  .process__track { height: calc(var(--stages) * 50svh + 100svh); }
   .process__grid { gap: 18px; }
   .mobile-stage-stepper { display: block; }
   .stage__title { min-height: 0; font-size: 1.5rem; }

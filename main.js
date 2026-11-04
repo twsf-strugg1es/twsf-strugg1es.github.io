@@ -903,6 +903,26 @@
   }
 
   /* ============================ FOOTER ============================ */
+  function typeFooterName(el, text) {
+    const caret = h("span", { class: "footer__caret" }, "_");
+    if (A.reduceMotion) {
+      el.replaceChildren(text, caret);
+      return;
+    }
+    el.replaceChildren("", caret);
+    let i = 0;
+    const step = () => {
+      i++;
+      el.textContent = text.slice(0, i);
+      el.append(caret);
+      RetroAudio.playKey();
+      if (i < text.length) {
+        setTimeout(step, 120 + Math.random() * 60);
+      }
+    };
+    setTimeout(step, 180);
+  }
+
   function renderFooter() {
     const year = new Date().getFullYear();
     const rebootBtn = h("button", {
@@ -912,12 +932,16 @@
       title: "Replay Vintage Loading Sequence"
     }, "[REBOOT BIOS]");
 
+    const nameP = h("p", { class: "footer__name", "data-reveal": "", "aria-hidden": "true" },
+      S.person.shortName,
+      h("span", { class: "footer__caret" }, "_")
+    );
+
     $('[data-slot="footer"]').replaceChildren(
       h("div", { class: "wrap" },
-        h("p", { class: "footer__name", "aria-hidden": "true" }, S.person.shortName),
+        nameP,
         h("div", { class: "footer__row" },
           h("p", null, "© " + year + " " + S.person.name),
-          h("p", null, S.footer.note),
           h("p", null, "Dhaka ", h("span", { "data-clock": "" })),
           h("div", { class: "footer__tools" },
             rebootBtn,
@@ -956,6 +980,7 @@
         const el = e.target;
         el.classList.add("in");
         if (el.hasAttribute("data-scramble")) A.scramble(el);
+        if (el.classList.contains("footer__name")) typeFooterName(el, S.person.shortName);
         el.querySelectorAll("[data-count]").forEach(countUp);
         if (el.classList.contains("sql-frame")) runSql();
         io.unobserve(el);
@@ -967,6 +992,7 @@
       for (const el of pending) {
         if (!el.classList.contains("in") && el.getBoundingClientRect().bottom < 0) {
           el.classList.add("in");
+          if (el.classList.contains("footer__name")) typeFooterName(el, S.person.shortName);
           el.querySelectorAll("[data-count]").forEach(countUp);
           if (el.classList.contains("sql-frame")) runSql();
           io.unobserve(el);
