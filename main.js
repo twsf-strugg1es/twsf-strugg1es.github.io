@@ -521,13 +521,20 @@
         h("p", { class: "project__links", "data-reveal": "" }, p.links.map((l) => link(l, "arrow-link")))
       );
       let media;
-      if (p.media.type === "images") {
+      if (p.media.type === "image" || p.media.type === "images") {
         const fig = (im, cls) => h("figure", { class: cls },
           h("img", { src: im.src, alt: im.alt, loading: "lazy", decoding: "async", width: 1600, height: 1000 }));
-        const main = fig(p.media.main, "shot shot--main");
-        const strip = h("div", { class: "strip" }, p.media.strip.map((im) => fig(im, "shot")));
-        media = h("div", { class: "project__media" }, main, strip);
-        [main, ...strip.children].forEach((f) => developers.push(A.develop(f)));
+        if (p.media.strip && p.media.strip.length > 0) {
+          const main = fig(p.media.main, "shot shot--main");
+          const strip = h("div", { class: "strip" }, p.media.strip.map((im) => fig(im, "shot")));
+          media = h("div", { class: "project__media" }, main, strip);
+          [main, ...strip.children].forEach((f) => developers.push(A.develop(f)));
+        } else {
+          const mainImg = p.media.main || p.media;
+          const main = fig(mainImg, "shot shot--single");
+          media = h("div", { class: "project__media" }, main);
+          developers.push(A.develop(main));
+        }
       } else {
         const pre = h("pre", { class: "art", "aria-hidden": "true" });
         pre.dataset.full = p.media.art;

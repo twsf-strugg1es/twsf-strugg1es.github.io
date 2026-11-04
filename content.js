@@ -145,24 +145,12 @@ window.SITE = {
         role: "Coordinated developers and designers; built the analytics views.",
         stack: ["TypeScript", "AI tutor", "Analytics"],
         links: [
-          { label: "Source on GitHub", href: "https://github.com/twsf-strugg1es/E-learning-Based-AI-Tutoring-System" },
+          { label: "Live platform", href: "https://tutoring-platform-five.vercel.app/" },
         ],
         media: {
-          type: "ascii",
-          caption: "Lesson view with the AI tutor and progress tracking",
-          art: String.raw`┌─ CourseKori ── Intro to SQL · lesson 4 ──────────┐
-│                                                  │
-│  progress   ████████████████░░░░░░░░░░   62%     │
-│  streak     6 days            quiz  4/5 correct  │
-│                                                  │
-│  you    why does GROUP BY merge my NULL rows?    │
-│                                                  │
-│  tutor  every NULL in the key lands in one       │
-│         group. Use COALESCE(city, 'unknown')     │
-│         if you need them apart.                  │
-│                                                  │
-│  ▸ try it   ▸ next lesson   ▸ ask again          │
-└──────────────────────────────────────────────────┘`,
+          type: "image",
+          src: "assets/work/coursekori.webp",
+          alt: "CourseKori AI-powered education platform: Transform your learning journey with AI-powered education",
         },
       },
       {
