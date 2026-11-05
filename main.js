@@ -280,7 +280,10 @@
 
     // CTA
     const cta = $('[data-slot="nav-cta"]');
-    cta.setAttribute("href", mailto());
+    if (cta) {
+      cta.setAttribute("href", "#contact");
+      cta.textContent = "Say hello";
+    }
 
     // Mobile Drawer Setup
     const drawerLinks = $("#drawer-links");
@@ -901,7 +904,7 @@
           h("p", { class: "contact__line", "data-reveal": "" }, C.line),
           h("p", { class: "contact__email", "data-reveal": "" }, h("a", { href: mailto() }, S.person.email)),
           h("div", { class: "contact__actions", "data-reveal": "" },
-            h("a", { class: "btn", href: mailto() }, "Email me"),
+            h("a", { class: "btn", href: mailto() }, "Send email"),
             copyBtn,
             C.links.map((l) => link(l, "btn btn--ghost"))
           )

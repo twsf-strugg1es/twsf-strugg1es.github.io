@@ -13,9 +13,9 @@
 
 window.SITE = {
   meta: {
-    title: "Ahmad Farruk Towsif | Technical Project Coordinator",
+    title: "Ahmad Farruk Towsif | Personal Site & Portfolio",
     description:
-      "Technical project coordinator in Dhaka. I turn messy briefs into software that ships on time. Python, MySQL, product management.",
+      "Personal website of Ahmad Farruk Towsif — Technical Project Coordinator and Computer Science graduate based in Dhaka, Bangladesh.",
     url: "https://whoistowsif.me/",
   },
 
@@ -31,7 +31,7 @@ window.SITE = {
     email: "towsif2000@gmail.com",
     // Path or link to a CV. Leave "" to hide the CV button.
     cvUrl: "",
-    status: "Open to conversations",
+    status: "Building & coordinating in Dhaka",
   },
 
   nav: [
@@ -40,26 +40,27 @@ window.SITE = {
     { label: "Work", href: "#work" },
     { label: "Process", href: "#process" },
     { label: "Toolkit", href: "#toolkit" },
+    { label: "Contact", href: "#contact" },
   ],
 
   hero: {
-    line: "Technical project coordinator at NS Media. I turn messy briefs into software that ships on time.",
-    primary: { label: "Get in touch", href: "#contact" },
-    secondary: { label: "See the work", href: "#work" },
+    line: "Technical project coordinator at NS Media & Computer Science graduate from BRAC University. Building software, exploring systems, and helping teams ship good products.",
+    primary: { label: "Say hello", href: "#contact" },
+    secondary: { label: "View projects", href: "#work" },
   },
 
   about: {
-    heading: "Between the brief and the build",
+    heading: "Between code and coordination",
     statement:
-      "I sit where clients and engineers meet. I write the requirements, run the sprint, chase the blocker, and make sure what ships is what was asked for.",
+      "I sit where product vision and engineering meet. I write technical requirements, run sprints, clear blockers, and make sure what ships is what was intended.",
     body:
-      "Computer Science graduate from BRAC University. I can read the code, query the database and talk to the client in the same afternoon, which is why teams hand me the projects that have too many moving parts.",
+      "Computer Science graduate from BRAC University with experience across software engineering, database design, and sprint delivery. I can read the code, query the database, and align with stakeholders in the same afternoon.",
     // Real, countable facts only. "value" animates up from 0.
     facts: [
       { value: 34, suffix: "", label: "public repositories on GitHub" },
-      { value: 4, suffix: "", label: "team products shipped and documented" },
+      { value: 4, suffix: "", label: "products built & shipped" },
       { value: 50, suffix: "+", label: "club members coordinated at BRACU FC" },
-      { value: 1, suffix: " yr", label: "running client projects at Forward Monkey" },
+      { value: 1, suffix: "+ yr", label: "running technical project delivery" },
     ],
   },
 
@@ -112,7 +113,7 @@ window.SITE = {
   },
 
   work: {
-    heading: "Things I helped ship",
+    heading: "Projects & things I've built",
     projects: [
       {
         title: "Fairpaper",
@@ -208,7 +209,7 @@ mysql> SELECT blood_group, COUNT(*) FROM donor
 
   process: {
     heading: "How a ticket moves",
-    intro: "Scroll to move one real ticket across my board.",
+    intro: "An interactive look at how I take an idea from backlog to production.",
     ticket: { id: "EXAM-42", title: "Auto-save answers every 10s", owner: "@towsif" },
     // Short column names keep the board readable on phones.
     columns: ["Backlog", "Planned", "Building", "Review", "Shipped"],
@@ -246,7 +247,7 @@ mysql> SELECT blood_group, COUNT(*) FROM donor
   },
 
   toolkit: {
-    heading: "What's in the toolkit",
+    heading: "Skills & toolkit",
     query: "SELECT skill, area, used_for FROM toolkit;",
     rows: [
       { skill: "Python", area: "code", used_for: "FastAPI services, scripts" },
@@ -268,8 +269,8 @@ mysql> SELECT blood_group, COUNT(*) FROM donor
   },
 
   contact: {
-    heading: "Let's ship the next one",
-    line: "Hiring a coordinator, or have a project with too many moving parts? Write to me. I answer within a day.",
+    heading: "Say hello",
+    line: "Always open to chat about software engineering, product coordination, interesting projects, or just talk shop. Drop me a line anytime.",
     links: [
       { label: "GitHub", href: "https://github.com/twsf-strugg1es" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/ahmad-farruk-towsif/" },
