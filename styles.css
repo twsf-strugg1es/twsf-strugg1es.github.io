@@ -1180,10 +1180,12 @@ button, input { font: inherit; color: inherit; }
   transition-delay: var(--d, 0ms);
 }
 .js [data-reveal].in,
-.still #pixel-loader { display: none !important; }
 .still [data-reveal] {
   opacity: 1;
   transform: none;
+}
+.still #pixel-loader {
+  display: none !important;
 }
 .js .project__text [data-reveal]:nth-child(2) { --d: 70ms; }
 .js .project__text [data-reveal]:nth-child(3) { --d: 140ms; }
@@ -1274,8 +1276,8 @@ button, input { font: inherit; color: inherit; }
   .stage__text { margin-top: 6px; font-size: 0.8125rem; }
 
   /* Toolkit & Terminal */
-  .sql-frame { min-height: 0; padding: 16px; }
-  .term { min-height: 0; }
+  .sql-frame { min-height: 280px; padding: 16px; }
+  .term { min-height: 340px; }
 
   /* Footer */
   .footer__row { flex-direction: column; align-items: flex-start; gap: 14px; }

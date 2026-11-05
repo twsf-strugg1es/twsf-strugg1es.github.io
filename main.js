@@ -617,7 +617,8 @@
     const W = colW * nCols + gap * (nCols - 1);
 
     const lineH = parseFloat(getComputedStyle(pre).lineHeight) || 16;
-    const H = clamp(Math.floor((window.innerHeight * (W < 60 ? 0.34 : 0.46)) / lineH), 13, 26);
+    const isMobile = window.innerWidth < 768;
+    const H = clamp(Math.floor((window.innerHeight * (isMobile ? 0.28 : 0.46)) / lineH), 12, 26);
     const grid = Array.from({ length: H }, () => Array(W).fill(" "));
     const tone = Array.from({ length: H }, () => Array(W).fill(0));
 
